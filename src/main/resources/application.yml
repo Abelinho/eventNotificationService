@@ -1,0 +1,8 @@
+spring:
+  h2:
+    console.enabled: true
+  datasource:
+    #url: jdbc:h2:mem:5a220b42-43e8-4c84-ba4b-6b545b456b8c
+    url: jdbc:h2:mem:test_mem
+  jpa:
+    defer-datasource-initialization: true
