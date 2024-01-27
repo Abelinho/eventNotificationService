@@ -29,6 +29,8 @@ public class Ticket extends AbstractEntity {
     @JoinColumn(name = "event_id")//,referencedColumnName = "ticket" unique=true?
     private Event event;
 
+    private String attendeeEmail;
+
 //    public Long getId() {
 //        return id;
 //    }
