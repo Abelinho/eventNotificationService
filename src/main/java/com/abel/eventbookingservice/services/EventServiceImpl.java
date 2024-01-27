@@ -76,12 +76,14 @@ public class EventServiceImpl implements EventService {
       // Only name is provided
       System.out.println("Only name is passed");
       return  buildResponse(eventRepository.findByEventNameContainingIgnoreCase(name)) ;
-    } else if (startDate != null && endDate != null) {
-      // Date range is provided
-      System.out.println("Only date is passed");
-     // return buildResponse(eventRepository.findByEventDateBetween(startDate, endDate)) ;
-      return buildResponse(eventRepository.findByEventDateGreaterThanEqualAndEventDateLessThanEqual(startDate, endDate)) ;
-    } else if (category != null) {
+    }
+//    else if (startDate != null && endDate != null) {
+//      // Date range is provided
+//      System.out.println("Only date is passed");
+//     // return buildResponse(eventRepository.findByEventDateBetween(startDate, endDate)) ;
+//      return buildResponse(eventRepository.findByEventDateGreaterThanEqualAndEventDateLessThanEqual(startDate, endDate)) ;
+//    } //the above block
+    else if (category != null) {
       // Only category is provided
       System.out.println("Only category is passed");
       return buildResponse(eventRepository.findByCategory(category));

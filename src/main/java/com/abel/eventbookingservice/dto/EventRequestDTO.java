@@ -19,6 +19,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
@@ -50,6 +51,7 @@ public class EventRequestDTO {
     private Integer availableAttendeesCount;
 
     @NotEmpty(message = "describe the event please!!")
+    @Length(max = 500,message = "event description cannot be more than 500")
     private String eventDescription;
 
     @NotEmpty(message = "category field is required")

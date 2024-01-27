@@ -6,3 +6,7 @@ spring:
     url: jdbc:h2:mem:test_mem
   jpa:
     defer-datasource-initialization: true
+app:
+#  jwt-secret: eventsecret note: I used the hashed string as a best practice
+  jwt-secret: d8169aa741b827bf8a97bd70ea7c51766ad4d90b356f0f493c716192d36e48e2
+  jwt-expiration-milliseconds: 604800000

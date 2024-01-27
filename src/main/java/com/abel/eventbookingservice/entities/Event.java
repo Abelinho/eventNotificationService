@@ -54,9 +54,9 @@ public class Event extends AbstractEntity{
 	@Builder.Default
 	private String category = Category.Concert.code;
 
-	@Column(name = "category",nullable = false)
-	@Builder.Default
-	private boolean booked = false;
+//	@Column(name = "category",nullable = false)
+//	@Builder.Default
+//	private boolean booked = false;
 
 //	@OneToMany(fetch = FetchType.LAZY,mappedBy ="event")
 //	private Set<Ticket> ticket; //not neccessary in this scenario

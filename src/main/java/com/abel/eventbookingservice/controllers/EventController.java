@@ -4,6 +4,7 @@ import com.abel.eventbookingservice.dto.EventRequestDTO;
 import com.abel.eventbookingservice.dto.EventResponseDTO;
 import com.abel.eventbookingservice.dto.TicketRequest;
 import com.abel.eventbookingservice.entities.Event;
+import com.abel.eventbookingservice.entities.Ticket;
 import com.abel.eventbookingservice.services.EventService;
 //import jakarta.validation.Valid;
 //import javax.validation.Valid;
@@ -18,6 +19,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -47,17 +49,17 @@ public class EventController {
 						  @RequestParam(required = false) String endDate,
 						  @RequestParam(required = false) String category){
 
-		LocalDateTime start = LocalDateTime.now();
+		LocalDateTime start = LocalDateTime.now();//use these dates if non is passed
 		LocalDateTime end = LocalDateTime.of(2030,12,30,23,30);
 		//parse the date String to a LocalDateTime
 		if (Objects.nonNull(startDate) && Objects.nonNull(endDate)){
 			//DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 			start =  LocalDateTime.parse(startDate);//,formatter
-			 end = LocalDateTime.parse(endDate);//,formatter
+			end = LocalDateTime.parse(endDate);//,formatter
 		}
 
 
-		List<EventResponseDTO> events = eventService.getEvents(name,start,end,category);
+		List<EventResponseDTO> events = eventService.getEvents(name,start,end,category);//fix this
 
 		if (events.isEmpty())
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -70,6 +72,23 @@ public class EventController {
 		//return null;//"this returns get all events";
 	}
 
+	@DeleteMapping(value = "/{ticketId}")
+	public ResponseEntity<String> cancelReservation(@PathVariable Long ticketId){
+
+		Long cancelledReservationId = ticketService.cancelReservation(ticketId);
+
+		return new ResponseEntity("successfully cancelled reservation: "+cancelledReservationId,HttpStatus.OK);
+
+	};
+
+	@GetMapping(value= "/reservedTickets")
+	public ResponseEntity<List<Ticket>> viewBookedEvents(){
+
+		   List<Ticket> reservedTickets = ticketService.getAllTickets();
+
+		   return new ResponseEntity<>(reservedTickets,HttpStatus.OK);
+	}
+
 	@PostMapping(value = "/events/{eventId}/tickets")
 	public ResponseEntity<String> reserveTicket(@RequestBody @Valid TicketRequest ticketRequest, @PathVariable Long eventId){
 
@@ -78,7 +97,6 @@ public class EventController {
        return new ResponseEntity<String>("eventId: "+String.valueOf(reservedTicketEventid),HttpStatus.CREATED);
 
     //To do:
-		//..see vids on users and roles in jwt
 		// 1. add endpoint for viewing booked events(booked event has 'booked'flag=true)
 		// ...admin user can see all booked events while ordinary users can see only events the booked
 		// 2. add endpoint for cancel reserved tickets(for logged in user i.e search by userid).
@@ -91,6 +109,7 @@ public class EventController {
 		//3. implement a job that notifies users of upcoming 'booked events'(add a flag to event to mark it
 		// as booked/not booked) and create history/audit event log
 		//4. write unit tests for controller and service methods
+		//6. add swagger 2 documentation
 
 
 //       ## Requirements
