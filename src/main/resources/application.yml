@@ -7,11 +7,16 @@ spring:
   jpa:
     defer-datasource-initialization: true
   mail:
-    host:
-    port:
-    username:
-    password:
+    host: smtp.gmail.com
+    port: 587
+    username: #johndoe
+    password: #dummypassword
     properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
 
 customer:
   notification:

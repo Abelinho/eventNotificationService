@@ -55,7 +55,16 @@ public class SpringSecurityConfig {
                     authorize.requestMatchers("/api/v1/user/**").permitAll();
                     authorize.requestMatchers("/h2-console/**").permitAll();
                     authorize.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll();
+                    authorize.requestMatchers("/swagger-ui-custom.html" ,
+                            "/swagger-ui.html",
+                            "/swagger-ui/**",
+                            "/v3/api-docs/**",
+                            "/webjars/**",
+                            "/swagger-ui/index.html",
+                            "/api-docs/**").permitAll();
+
                     authorize.anyRequest().authenticated();
+
                 }).httpBasic(Customizer.withDefaults())  //;
 
             .headers((headers) -> headers.frameOptions((frameOptions) -> frameOptions.disable()))
