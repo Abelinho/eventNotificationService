@@ -11,5 +11,7 @@ public class PasswordEncoderImpl {
         System.out.println(passwordEncoder.encode("abel"));
 
         System.out.println(passwordEncoder.encode("admin"));
+        
+//        System.out.println(passwordEncoder.encode("password123"));
     }
 }

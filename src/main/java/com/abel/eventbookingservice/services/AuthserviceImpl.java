@@ -8,6 +8,8 @@ import com.abel.eventbookingservice.exceptions.EventAPIException;
 import com.abel.eventbookingservice.repos.RoleRepository;
 import com.abel.eventbookingservice.repos.UserRepository;
 import com.abel.eventbookingservice.security.JwtTokenProvider;
+
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
